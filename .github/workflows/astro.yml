@@ -49,7 +49,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
-          cache-dependency-path: '**/pnpm-lock.yaml'
+          cache-dependency-path: './pnpm-lock.yaml'
           
       # The BUILD_PATH variable is critical here.
       # If BUILD_PATH is 'frontend', this installs dependencies for 'frontend/pnpm-lock.yaml'.
