@@ -1,0 +1,40 @@
+---
+import Anchor from "./Anchor.astro";
+import { getCollection } from "astro:content";
+
+const posts = await getCollection("news");
+
+const { limit = 5 } = Astro.props as { limit?: number };
+
+posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+if (limit) {
+  posts.splice(limit);
+}
+---
+
+<ul class="space-y-2">
+  {
+    posts.map((post) => (
+      <li class="flex gap-3 text-sm">
+        <time
+          datetime={post.data.pubDate.toISOString()}
+          class="text-gray-500 shrink-0"
+        >
+          {post.data.pubDate.toLocaleDateString("ja-JP", {
+            year: "numeric",
+            month: "2-digit",
+            day: "2-digit",
+          })}
+        </time>
+        <Anchor
+          href={`/news/${encodeURI(post.slug)}`}
+          title={post.data.title}
+          class="hover:underline overflow-hidden whitespace-nowrap truncate"
+        >
+          {post.data.title}
+        </Anchor>
+      </li>
+    ))
+  }
+</ul>

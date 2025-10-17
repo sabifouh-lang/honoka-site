@@ -1,0 +1,13 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+import NewsList from "../../components/NewsList.astro";
+
+const posts = await getCollection("news");
+
+const pageTitle = "お知らせ";
+---
+
+<Layout pageTitle={pageTitle}>
+  <NewsList limit={posts.length} />
+</Layout>

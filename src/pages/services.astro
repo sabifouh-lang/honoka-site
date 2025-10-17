@@ -1,0 +1,37 @@
+---
+import Heading from "../components/Heading.astro";
+import Paragraph from "../components/Paragraph.astro";
+import Layout from "../layouts/Layout.astro";
+import ImageWithDescription from "../components/ImageWithDescription.astro";
+const pageTitle = "事業";
+---
+
+<Layout pageTitle={pageTitle}>
+  <Heading>{pageTitle}</Heading>
+  <Paragraph>
+    青和会では、精神障がい者の方々が地域で安心して生活できるよう、様々な支援サービスを提供しています。以下に主な事業内容をご紹介します。
+  </Paragraph>
+
+  <Heading level={3}>藤岡ふれあいセンター ほのか</Heading>
+  <ImageWithDescription
+    src="/images/honoka-hp01.jpg"
+    alt="就労継続支援B型の様子"
+  >
+    藤岡ふれあいセンター
+    ほのかでは、精神障がい者の方々が働く場を提供し、社会参加と自立を支援しています。軽作業や手工芸など、多様な作業内容を用意しています。
+  </ImageWithDescription>
+
+  <Heading level={3}>相談支援事業所 ほのか</Heading>
+  <ImageWithDescription src="/images/honoka-hp01.jpg" alt="相談支援事業の様子">
+    藤岡市障害者相談支援事業所では、精神障がい者の方々やそのご家族に対して、生活全般に関する相談支援を行っています。必要なサービスの利用計画作成や調整もサポートします。
+  </ImageWithDescription>
+
+  <Heading level={3}>かりて</Heading>
+  <ImageWithDescription
+    src="/images/honoka-hp01.jpg"
+    alt="地域活動支援センターの様子"
+  >
+    藤岡市精神障害者地域活動支援センター
+    ふれあいでは、精神障がい者の方々が地域での交流や活動を通じて、社会的なつながりを築く場を提供しています。各種イベントやワークショップも開催しています。
+  </ImageWithDescription>
+</Layout>

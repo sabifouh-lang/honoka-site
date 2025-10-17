@@ -1,0 +1,83 @@
+---
+import Heading from "../components/Heading.astro";
+import Paragraph from "../components/Paragraph.astro";
+import Table from "../components/Table.astro";
+import Layout from "../layouts/Layout.astro";
+const pageTitle = "青和会について";
+
+const aboutData = [
+  { label: "法人名", value: ["社会福祉法人 青和会"] },
+  { label: "代表者", value: ["理事長  青木 儀広"] },
+  {
+    label: "法人本部所在地",
+    value: ["〒375-0057 ", "群馬県藤岡市上落合133-5"],
+  },
+  { label: "TEL", value: ["0274-40-8120"] },
+  { label: "FAX", value: ["0274-40-8121"] },
+  { label: "URL", value: ["http://www.seiwakai-fujioka.or.jp/"] },
+  { label: "設立", value: ["2005年11月"] },
+];
+
+const historyData = [
+  { label: "平成17年 11月", value: ["社会福祉法人青和会の認可を受ける。"] },
+  {
+    label: "平成18年 6月",
+    value: [
+      "精神保健福祉法に基づく精神障害者通所授産施設「藤岡ふれあいセンター ほのか」開設。",
+    ],
+  },
+  {
+    label: "平成18年 10月",
+    value: [
+      "「藤岡市障害者相談支援事業所」開設。",
+      "18歳未満を含む精神障がい者の指定相談支援事業を行う。",
+    ],
+  },
+  {
+    label: "平成20年 4月",
+    value: [
+      "藤岡市地域生活支援事業委託により「藤岡市精神障害者地域活動支援センター ふれあい」開設。",
+      "精神障がい者の生活援助・作業援助等を行う。",
+    ],
+  },
+  {
+    label: "平成23年 4月",
+    value: [
+      "障害者自立支援法への移行に伴い、「藤岡ふれあいセンター ほのか」にて就労継続支援B型事業開始。",
+      "指定障害福祉サービスの提供。",
+    ],
+  },
+  {
+    label: "平成24年 4月",
+    value: [
+      "藤岡市より指定を受け、指定特定相談支援事業を開設。",
+      "指定計画相談支援（サービスなどの利用計画作成など）を行う。",
+    ],
+  },
+  {
+    label: "平成29年 4月",
+    value: [
+      "就労継続支援A型事業所「かりて」開設。",
+      "アルファ化米の製造工場として、指定障害福祉サービスの提供。",
+    ],
+  },
+  {
+    label: "平成30年 8月",
+    value: [
+      "就労継続支援B型事業所「藤岡ふれあいセンターほのか」施設内に、就労定着支援事業所「ほのか」開設。",
+      "指定障害福祉サービスの提供。",
+    ],
+  },
+];
+---
+
+<Layout pageTitle={pageTitle}>
+  <Heading level={3}>法人概要</Heading>
+  <Table data={aboutData} />
+  <Heading level={3}>理念</Heading>
+  <Paragraph>
+    私たちは、障がいのある方々が地域で安心して生活できるように支援します。
+  </Paragraph>
+  <Heading level={3}>法人沿革</Heading>
+  <Table data={historyData} />
+</Layout>

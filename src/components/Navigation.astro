@@ -1,0 +1,147 @@
+---
+const navigationContent = {
+  home: "ホーム",
+  about: "青和会について",
+  services: "事業",
+  news: "お知らせ",
+  recruit: "採用情報",
+};
+---
+
+<!-- デスクトップ用（md以上のみ表示） -->
+<nav class="hidden md:block bg-green-600 p-4 text-white font-bold rounded-xl">
+  <ul class="flex justify-between items-center">
+    {
+      Object.entries(navigationContent).map(([key, value]) => (
+        <li
+          class="relative flex-1 text-center
+                 before:content-[''] before:absolute before:right-0 before:top-1/2 
+                 before:-translate-y-1/2 before:w-px before:h-6 before:bg-white
+                 last:before:hidden"
+        >
+          <a
+            href={`/${key === "home" ? "" : key}`}
+            class="hover:underline block"
+          >
+            {value}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<!-- モバイル用（md未満のみ表示）：ハンバーガーを右上固定。緑バーは出さない -->
+<button
+  id="menu-toggle"
+  class="md:hidden fixed top-3 right-3 z-50 inline-flex items-center justify-center rounded-lg p-2 bg-green-600 text-white backdrop-blur
+         focus:outline-none focus:ring-2 focus:ring-white/70"
+  aria-label="メニューを開く"
+  aria-controls="mobile-menu"
+  aria-expanded="false"
+>
+  <!-- 開く -->
+  <svg
+    id="icon-open"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    class="h-7 w-7"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <line x1="3" y1="6" x2="21" y2="6"></line>
+    <line x1="3" y1="12" x2="21" y2="12"></line>
+    <line x1="3" y1="18" x2="21" y2="18"></line>
+  </svg>
+  <!-- 閉じる -->
+  <svg
+    id="icon-close"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    class="h-7 w-7 hidden"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <line x1="18" y1="6" x2="6" y2="18"></line>
+    <line x1="6" y1="6" x2="18" y2="18"></line>
+  </svg>
+</button>
+
+<!-- モバイル用ドロップダウン（右上から展開） -->
+<ul
+  id="mobile-menu"
+  class="md:hidden fixed top-14 right-3 z-40 hidden w-60 rounded-lg bg-white/95 text-gray-900 shadow-xl ring-1 ring-black/10
+         origin-top-right"
+>
+  {
+    Object.entries(navigationContent).map(([key, value]) => (
+      <li>
+        <a
+          href={`/${key === "home" ? "" : key}`}
+          class="block px-4 py-3 hover:bg-gray-100"
+          data-close-menu
+        >
+          {value}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<script is:inline>
+  (function () {
+    const btn = document.getElementById("menu-toggle");
+    const menu = document.getElementById("mobile-menu");
+    const iconOpen = document.getElementById("icon-open");
+    const iconClose = document.getElementById("icon-close");
+    if (!btn || !menu) return;
+
+    const setOpen = (open) => {
+      btn.setAttribute("aria-expanded", String(open));
+      btn.setAttribute(
+        "aria-label",
+        open ? "メニューを閉じる" : "メニューを開く",
+      );
+      menu.classList.toggle("hidden", !open);
+      iconOpen.classList.toggle("hidden", open);
+      iconClose.classList.toggle("hidden", !open);
+    };
+
+    let isOpen = false;
+    btn.addEventListener("click", () => {
+      isOpen = !isOpen;
+      setOpen(isOpen);
+    });
+
+    // メニュー内クリックで閉じる
+    menu.addEventListener("click", (e) => {
+      if (e.target && e.target.closest("[data-close-menu]")) {
+        isOpen = false;
+        setOpen(false);
+      }
+    });
+
+    // 外側クリックで閉じる
+    document.addEventListener("click", (e) => {
+      if (isOpen && !menu.contains(e.target) && !btn.contains(e.target)) {
+        isOpen = false;
+        setOpen(false);
+      }
+    });
+
+    // ESCで閉じる
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen) {
+        isOpen = false;
+        setOpen(false);
+        btn.focus();
+      }
+    });
+  })();
+</script>

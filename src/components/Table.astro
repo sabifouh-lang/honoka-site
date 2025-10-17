@@ -1,0 +1,28 @@
+---
+// 二列のテーブルを表示するコンポーネント
+type TableRow = { label: string; value: string[] };
+
+const { data } = Astro.props as { data: TableRow[] };
+---
+
+<table class="table-auto w-full border-collapse border border-gray-300">
+  <tbody>
+    {
+      data.map(({ label, value }) => (
+        <tr class="border-b border-gray-300">
+          <td class="border border-gray-300 px-4 py-2 font-semibold bg-gray-100 w-1/3 text-sm">
+            {label}
+          </td>
+          <td class="border border-gray-300 px-4 py-2 text-sm">
+            {value.map((line, index) => (
+              <>
+                {line}
+                {index < value.length - 1 && <br />}
+              </>
+            ))}
+          </td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>

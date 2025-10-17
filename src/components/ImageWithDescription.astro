@@ -1,0 +1,14 @@
+---
+import Paragraph from "./Paragraph.astro";
+---
+
+<div class="flex flex-col md:flex-row md:space-x-8 mb-8">
+  <img
+    src={Astro.props.src}
+    alt={Astro.props.alt}
+    class="w-full md:w-1/3 rounded-lg"
+  />
+  <Paragraph class="mt-4 md:mt-0 md:w-2/3">
+    <slot />
+  </Paragraph>
+</div>
