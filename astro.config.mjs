@@ -9,6 +9,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  site: "http://www.seiwakai-fujioka.or.jp",
   integrations: [sitemap()],
 });
