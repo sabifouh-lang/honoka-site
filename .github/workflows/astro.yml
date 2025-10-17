@@ -48,8 +48,8 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
           cache-dependency-path: |
-            ./frontend/pnpm-lock.yaml
-            ./backend/pnpm-lock.yaml
+            ${{ github.workspace }}/frontend/pnpm-lock.yaml
+            ${{ github.workspace }}/backend/pnpm-lock.yaml
       - name: Detect package manager
         id: detect-package-manager
         run: |
