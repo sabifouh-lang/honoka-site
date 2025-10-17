@@ -52,9 +52,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
           # FIX 2: Use absolute paths for cache-dependency-path
-          cache-dependency-path: |
-            ${{ github.workspace }}/frontend/pnpm-lock.yaml
-            ${{ github.workspace }}/backend/pnpm-lock.yaml
+          cache-dependency-path: '**/pnpm-lock.yaml'
             
       # Simplify install and build steps to use pnpm commands directly
       - name: Install dependencies
