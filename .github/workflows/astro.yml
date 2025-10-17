@@ -39,25 +39,23 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       
-      # FIX 1: Provide explicit pnpm version (from the previous error)
       - name: Install pnpm
         uses: pnpm/action-setup@v4.0.0
         with:
-          version: 8 # Or a specific version, e.g., '8.15.5'
+          version: 8 # Or a specific version
           
-      # The main Node setup and pnpm cache step
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
-          # FIX 2: Use absolute paths for cache-dependency-path
           cache-dependency-path: '**/pnpm-lock.yaml'
-            
-      # Simplify install and build steps to use pnpm commands directly
+          
+      # The BUILD_PATH variable is critical here.
+      # If BUILD_PATH is 'frontend', this installs dependencies for 'frontend/pnpm-lock.yaml'.
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-        working-directory: ${{ env.BUILD_PATH }}
+        working-directory: ${{ env.BUILD_PATH }} # <- This is where the lockfile for the install must be.
         
       - name: Setup Pages
         id: pages
@@ -68,7 +66,7 @@ jobs:
           pnpm astro build \
             --site "${{ steps.pages.outputs.origin }}" \
             --base "${{ steps.pages.outputs.base_path }}"
-        working-directory: ${{ env.BUILD_PATH }}
+        working-directory: ${{ env.BUILD_PATH }} # <- This ensures the build runs inside the project folder.
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
