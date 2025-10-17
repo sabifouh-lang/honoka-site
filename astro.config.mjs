@@ -9,5 +9,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
+  site: "https://sabifouh-lang.github.io",
+  base: "honoka-site",
   integrations: [sitemap()],
 });
