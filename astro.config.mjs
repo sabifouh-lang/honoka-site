@@ -10,6 +10,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   site: "https://sabifouh-lang.github.io",
-  base: "honoka-site",
+  base: "/honoka-site",
   integrations: [sitemap()],
 });
