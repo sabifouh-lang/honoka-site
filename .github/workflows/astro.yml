@@ -54,7 +54,7 @@ jobs:
       # The BUILD_PATH variable is critical here.
       # If BUILD_PATH is 'frontend', this installs dependencies for 'frontend/pnpm-lock.yaml'.
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
         working-directory: ${{ env.BUILD_PATH }} # <- This is where the lockfile for the install must be.
         
       - name: Setup Pages
