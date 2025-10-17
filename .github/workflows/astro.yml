@@ -46,10 +46,9 @@ jobs:
           
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
-          cache-dependency-path: './pnpm-lock.yaml'
+        node-version: ${{ matrix.node-version }}
+        cache: 'pnpm'
+        cache-dependency-path: ${{ env.BUILD_PATH }}/pnpm-lock.yaml
           
       # The BUILD_PATH variable is critical here.
       # If BUILD_PATH is 'frontend', this installs dependencies for 'frontend/pnpm-lock.yaml'.
